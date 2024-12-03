@@ -8,7 +8,11 @@
 <p>This is a sample application to demonstrate authenticating against github oauth,
 using Flask, on Heroku.</p>
 
-<h2>{{user}}</h2>
-<h4>{{text}}</h4>
+{% for document in documents %}
+	<h2>{{documents.userid}}</h2>
+	<h4>{{documents.text}}</h4>
+{% endfor %}
+
+
 
 {% endblock %}

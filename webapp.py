@@ -61,13 +61,12 @@ def inject_logged_in():
 
 @app.route('/')
 def home():
-    user = ''
-    text = ''
+    documents = []
     for doc in collection.find():
-        user = doc['userid']
-        text = doc['text']
+        documents.append({"user": doc['userid'], "text": doc["text"]})
+        
     
-    return render_template('home.html',text=text,user=user)
+    return render_template('home.html',documents=documents)
 
 #redirect to GitHub's OAuth page and confirm callback URL
 @app.route('/login')
