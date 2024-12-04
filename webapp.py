@@ -65,7 +65,7 @@ def home():
     for doc in collection.find():
         documents.append({"user": doc['userid'], "text": doc["text"]})
         
-    
+    print(documents)
     return render_template('home.html',documents=documents)
 
 #redirect to GitHub's OAuth page and confirm callback URL

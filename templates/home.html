@@ -5,12 +5,11 @@
 {% block content %}
   <h1>Home</h1>
 
-<p>This is a sample application to demonstrate authenticating against github oauth,
-using Flask, on Heroku.</p>
+
 
 {% for document in documents %}
-	<h2>{{documents.userid}}</h2>
-	<h4>{{documents.text}}</h4>
+	<h2>{{document.user}}</h2>
+	<h4>{{document.text}}</h4>
 {% endfor %}
 
 
