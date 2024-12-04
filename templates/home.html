@@ -5,6 +5,13 @@
 {% block content %}
   <h1>Home</h1>
 
+	<form action="/action_page.php">
+		<div class="mb-3 mt-3">
+			<label for="comment">Enter your post:</label>
+			<textarea class="form-control" rows="5" id="post" name="text"></textarea>
+		</div>
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
 
 
 {% for document in documents %}
