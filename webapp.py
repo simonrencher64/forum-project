@@ -86,7 +86,7 @@ def login():
 @app.route('/logout')
 def logout():
     session.clear()
-    return render_template('home.html', message='You were logged out')
+    return render_template('message.html', message='You were logged out')
 
 @app.route('/login/authorized')
 def authorized():
@@ -105,7 +105,7 @@ def authorized():
             session.clear()
             print(inst)
             message='Unable to login, please try again.  '
-    return render_template('home.html', message=message)
+    return render_template('message.html', message=message)
 
 
 @app.route('/page1')
