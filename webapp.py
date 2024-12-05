@@ -120,6 +120,14 @@ def renderPage2():
         return render_template('page2.html',followers=followers,following=following,public_repos=public_repos,user_id=user_id)
     else:
         return render_template('page2.html')
+        
+        
+
+
+
+
+
+
 
 @app.route('/googleb4c3aeedcc2dd103.html')
 def render_google_verification():
