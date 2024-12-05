@@ -14,10 +14,12 @@
 	</form>
 
 
-{% for document in documents %}
+{% for document in documents|reverse %}
 	<h2>{{document.user}}</h2>
 	<h4>{{document.text}}</h4>
 {% endfor %}
+
+
 
 
 <p>{{post1}}<p>
