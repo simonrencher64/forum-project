@@ -70,11 +70,13 @@ def home():
     return render_template('home.html',documents=documents)
 @app.route('/post',methods=['GET','POST'])
 def post():
-    session["post"]=request.form['post']
-    collection.insert_one({"userid": session['user_data']['login'], "text": session["post"]})
-    
-    
-    return redirect(url_for("home"))
+    if 'user_data' in session:
+        session["post"]=request.form['post']
+        collection.insert_one({"userid": session['user_data']['login'], "text": session["post"]})
+        return redirect(url_for("home"))
+    else:
+        message = 'Please log in before posting.'
+        return render_template('message.html', message=message)
 
 #redirect to GitHub's OAuth page and confirm callback URL
 @app.route('/login')
