@@ -66,7 +66,15 @@ def home():
         documents.append({"user": doc['userid'], "text": doc["text"]})
         
     print(documents)
+
     return render_template('home.html',documents=documents)
+@app.route('/post',methods=['GET','POST'])
+def post():
+    session["post"]=request.form['post']
+    documents.append({"user": session['user_data']['login'], "text": session["post"]})
+    
+    
+    return redirect(url_for("home"))
 
 #redirect to GitHub's OAuth page and confirm callback URL
 @app.route('/login')
@@ -105,10 +113,10 @@ def renderPage1():
     else:
         user_data_pprint = '';
     return render_template('page1.html',dump_user_data=user_data_pprint)
-
+    
 @app.route('/page2')
 def renderPage2():
-    
+    # session["post"]=request.form['post']
         
     if 'user_data' in session:
     
