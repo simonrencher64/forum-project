@@ -68,6 +68,8 @@ def home():
     print(documents)
 
     return render_template('home.html',documents=documents)
+
+
 @app.route('/post',methods=['GET','POST'])
 def post():
     if 'user_data' in session:
@@ -110,11 +112,17 @@ def authorized():
 
 @app.route('/page1')
 def renderPage1():
-    if 'user_data' in session:
-        user_data_pprint = pprint.pformat(session['user_data'])#format the user data nicely
-    else:
-        user_data_pprint = '';
-    return render_template('page1.html',dump_user_data=user_data_pprint)
+    
+    return render_template('page1.html')
+    
+@app.route('/search',methods=['GET','POST'])
+def search():
+    
+    searchText=request.form['search']
+    
+    return render_template('page1.html',searchText=searchText)
+    
+    
     
 @app.route('/page2')
 def renderPage2():

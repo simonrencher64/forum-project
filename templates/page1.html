@@ -3,12 +3,17 @@
 {% block title %}page1{% endblock %}
 
 {% block content %}
-  <h1>This is Page 1</h1>
+  <h1>Search Posts</h1>
+	<form action ={{ url_for("search") }} method="GET">
+		<div class="mb-3 mt-3">
+			<label for="search">Enter your post:</label>
+			<textarea class="form-control" rows="5" id="search" name="search"></textarea>
+		</div>
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+	
+	{{searchText}}
 
-<p>Lorem ipsum sit dolor amet.</p>
 
-<pre>
-{{ dump_user_data }}
-</pre>
 
 {% endblock %}
