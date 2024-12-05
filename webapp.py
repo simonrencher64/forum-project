@@ -71,7 +71,7 @@ def home():
 @app.route('/post',methods=['GET','POST'])
 def post():
     session["post"]=request.form['post']
-    documents.append({"user": session['user_data']['login'], "text": session["post"]})
+    collection.insert_one({"userid": session['user_data']['login'], "text": session["post"]})
     
     
     return redirect(url_for("home"))
