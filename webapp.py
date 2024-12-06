@@ -130,11 +130,10 @@ def search():
         
         for word in words:
             if word in docWords:
-                documents.append({"user": doc['userid'], "text": doc["text"]})
-        
-        
-        
-    
+                if {"user": doc['userid'], "text": doc["text"]} not in documents:
+                    documents.append({"user": doc['userid'], "text": doc["text"]})
+
+
     return render_template('page1.html',searchText=searchText,documents=documents)
     
     
