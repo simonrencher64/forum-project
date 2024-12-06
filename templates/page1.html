@@ -4,15 +4,18 @@
 
 {% block content %}
   <h1>Search Posts</h1>
-	<form action ={{ url_for("search") }} method="GET">
+	<form action ="/search" method="GET">
 		<div class="mb-3 mt-3">
-			<label for="search">Enter your post:</label>
+			<label for="text">Enter your post:</label>
 			<textarea class="form-control" rows="5" id="search" name="search"></textarea>
 		</div>
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>
 	
-	{{searchText}}
+	{% for document in documents %}
+	<h2>{{document.user}}</h2>
+	<h4>{{document.text}}</h4>
+	{% endfor %}
 
 
 
