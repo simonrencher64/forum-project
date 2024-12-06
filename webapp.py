@@ -124,6 +124,7 @@ def search():
     
     documents = []
     
+    failmessage = ''
     
     for doc in collection.find():
         docWords = doc["text"].split()
@@ -132,9 +133,11 @@ def search():
             if word in docWords:
                 if {"user": doc['userid'], "text": doc["text"]} not in documents:
                     documents.append({"user": doc['userid'], "text": doc["text"]})
+    
+    if documents == []:
+        failmessage = 'No posts matched your search :('
 
-
-    return render_template('page1.html',searchText=searchText,documents=documents)
+    return render_template('page1.html',searchText=searchText,documents=documents,failmessage=failmessage)
     
     
     
