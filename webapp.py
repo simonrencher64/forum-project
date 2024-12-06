@@ -120,12 +120,19 @@ def renderPage1():
 def search():
     
     searchText=request.args['search']
+    words = searchText.split()
     
     documents = []
     
+    
     for doc in collection.find():
-        if doc['text'] == searchText:
-            documents.append({"user": doc['userid'], "text": doc["text"]})
+        docWords = doc["text"].split()
+        
+        for word in words:
+            if word in docWords:
+                documents.append({"user": doc['userid'], "text": doc["text"]})
+        
+        
         
     
     return render_template('page1.html',searchText=searchText,documents=documents)
