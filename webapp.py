@@ -74,7 +74,7 @@ def home():
 def post():
     if 'user_data' in session:
         session["post"]=request.form['post']
-        collection.insert_one({"userid": session['user_data']['login'], "text": session["post"]})
+        collection.insert_one({"userid": session['user_data']['login'], "text": session["post"], "comments": []})
         return redirect(url_for("home"))
     else:
         message = 'Please log in before posting.'
@@ -139,26 +139,27 @@ def search():
 
     return render_template('page1.html',searchText=searchText,documents=documents,failmessage=failmessage)
     
+
+
+
+@app.route('/comments_page',methods=['GET','POST'])
+def renderComments_page():
     
+    document = request.args['document']
+    
+    return render_template('comments_page.html',document=document)
+    
+
     
 @app.route('/page2')
 def renderPage2():
-    # session["post"]=request.form['post']
-        
-    if 'user_data' in session:
     
-        followers = session['user_data']["followers"]
-        following = session['user_data']["following"]
-        public_repos = session['user_data']["public_repos"]
-        user_id = session['user_data']["id"]
     
-        return render_template('page2.html',followers=followers,following=following,public_repos=public_repos,user_id=user_id)
-    else:
-        return render_template('page2.html')
-        
-        
+    
+    return render_template('page2.html')
 
-
+# app.route('/replies',methods=['GET','POST'])
+# def render_replies():
 
 
 

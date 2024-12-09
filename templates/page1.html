@@ -12,7 +12,7 @@
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>
 	
-	{% for document in documents %}
+	{% for document in documents|reverse %}
 	<h2>{{document.user}}</h2>
 	<h4>{{document.text}}</h4>
 	{% endfor %}
