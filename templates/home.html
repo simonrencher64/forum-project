@@ -3,12 +3,13 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-  <h1>Home</h1>
+  <h1>Posts</h1>
 	<form action ={{ url_for("post") }} method="POST">
 		<div class="mb-3 mt-3">
 			<label for="comment">Enter your post:</label>
 			<textarea class="form-control" rows="5" id="post" name="post"></textarea>
 		</div>
+		<br>
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>
 
