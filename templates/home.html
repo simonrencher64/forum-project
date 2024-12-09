@@ -17,7 +17,13 @@
 {% for document in documents|reverse %}
 <h2>{{document.user}}</h2>
 <h4>{{document.text}}</h4>
-<a href="/comments_page">Comments</a>
+
+<form action ="/comments_page" method="GET">
+		<div class="mb-3 mt-3" hidden>
+			<input type="text" id="document" name="documentId" value={{document.id}}><br><br>
+		</div>
+		<button type="submit" class="btn">Comments</button>
+</form>
 {% endfor %}
 
 

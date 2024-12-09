@@ -63,7 +63,7 @@ def inject_logged_in():
 def home():
     documents = []
     for doc in collection.find():
-        documents.append({"user": doc['userid'], "text": doc["text"]})
+        documents.append({"user": doc['userid'], "text": doc["text"], "id": doc['_id']})
         
     
 
@@ -142,13 +142,33 @@ def search():
 
 
 
+
+
+
 @app.route('/comments_page',methods=['GET','POST'])
 def renderComments_page():
     
-    document = request.args['document']
+    documentId = request.args['documentId']
+    
+    document = ''
+    
+    for doc in collection.find():
+        
+        if documentId == str(doc['_id']):
+            document = doc
+            
+    
+    
     
     return render_template('comments_page.html',document=document)
     
+
+
+@app.route('/comment',methods=['GET','POST'])
+def comment():
+    print(request.args['documentId'])
+
+
 
     
 @app.route('/page2')

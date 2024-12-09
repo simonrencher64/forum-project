@@ -5,8 +5,20 @@
 {% block content %}
   <h1>Comments</h1>
 
-{{document}}
+<form action ={{ url_for("comment") }} method="POST">
+	<div class="mb-3 mt-3">
+		<label for="comment">Enter your comment:</label>
+		<textarea class="form-control" rows="5" id="comment" name="comment"></textarea>
+	</div>
+	<br>
+	<button type="submit" class="btn btn-primary">Submit</button>
+</form>
 
+
+<h2>{{document.userid}}</h2>
+<h4>{{document.text}}</h4>
+
+<h4>{{document.comments}}</h4>
 
 
 {% endblock %}
