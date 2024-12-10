@@ -18,7 +18,9 @@
 <h2>{{document.userid}}</h2>
 <h4>{{document.text}}</h4>
 
-<h4>{{document.comments}}</h4>
+{% for text in commentList|reverse %}
+<h5>{{text}}</h5>
+{% endfor %}
 
 
 {% endblock %}

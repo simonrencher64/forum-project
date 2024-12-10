@@ -3,6 +3,8 @@ from flask_oauthlib.client import OAuth
 #from flask_oauthlib.contrib.apps import github #import to make requests to GitHub's OAuth
 from flask import render_template
 
+from bson.objectid import ObjectId
+
 import pymongo
 import os
 import sys
@@ -65,7 +67,7 @@ def home():
     for doc in collection.find():
         documents.append({"user": doc['userid'], "text": doc["text"], "id": doc['_id']})
         
-    
+    #print(documents)
 
     return render_template('home.html',documents=documents)
 
@@ -148,7 +150,10 @@ def search():
 @app.route('/comments_page',methods=['GET','POST'])
 def renderComments_page():
     
-    documentId = request.args['documentId']
+    try:
+        documentId = request.args['documentId']
+    except:
+        documentId = session['documentId']
     
     document = ''
     
@@ -156,18 +161,37 @@ def renderComments_page():
         
         if documentId == str(doc['_id']):
             document = doc
+            session['documentId'] = str(doc['_id'])
+            commentList = doc['comments']
             
     
     
     
-    return render_template('comments_page.html',document=document)
+    return render_template('comments_page.html',document=document,commentList=commentList)
     
 
 
 @app.route('/comment',methods=['GET','POST'])
 def comment():
-    print(request.args['documentId'])
-
+    documentId = session['documentId']
+    print(session["documentId"])
+    comment = request.form['comment']
+    
+    for doc in collection.find():
+        
+        if documentId == str(doc['_id']):
+            commentList = doc['comments']
+            print(commentList)
+            commentList.append(comment)
+            
+            print(commentList)
+            
+            myquery = { "_id": ObjectId(documentId) }
+            newvalues = { "$set": { "comments": commentList } }
+            
+            collection.update_one(myquery, newvalues)
+    
+    return redirect(url_for("renderComments_page"))
 
 
     
